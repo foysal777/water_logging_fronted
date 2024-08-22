@@ -9,7 +9,9 @@ const handleRegister = (event) => {
     const email = getValue("email");
     const password = getValue("password");
     const confirm_password = getValue("confirm_password");
-    const user_type = getValue("user_type");
+    const role = getValue("user_type");
+    console.log(role)
+    console.log(typeof(role))
 
     const info = {
         username,
@@ -18,7 +20,7 @@ const handleRegister = (event) => {
         email,
         password,
         confirm_password,
-        user_type, // Adding the user_type field
+        role, 
     };
 
     console.log(JSON.stringify(info));

@@ -20,7 +20,7 @@ fetch("navbar.html")
                 <a class="dropdown-item" href="wishlist.html">Profile</a>
             </li>
             <li class="nav-item">
-                <a id="logoutLink" class="dropdown-item" href="#" onclick="handleLogout()">Logout</a>
+                <a id="logoutLink" class="dropdown-item" href="#" onclick="handlelogOut()">Logout</a>
             </li>
         `;
     } else {
