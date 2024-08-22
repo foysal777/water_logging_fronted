@@ -1,0 +1,88 @@
+.image-container {
+    position: relative;
+    width: 100%;
+    height: auto; /* Maintain the aspect ratio of the image */
+}
+
+.image-container img {
+    width: 100%;
+    height: auto; /* Maintain the aspect ratio of the image */
+    display: block; /* Remove bottom space under image */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Text color */
+    text-align: center;
+    padding: 2rem; /* Padding around the content */
+    box-sizing: border-box;
+    z-index: 1; /* Ensure overlay is on top of the image */
+}
+
+.text-overlay {
+    font-size: 2rem; /* Adjust font size as needed */
+    margin-bottom: 1rem; /* Space below the heading */
+}
+
+p {
+    font-size: 1.25rem; /* Adjust font size as needed */
+    margin-bottom: 1.5rem; /* Space below the paragraph */
+}
+
+.contact-btn {
+    background-color: #007bff; /* Bootstrap primary color or your custom color */
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 0.25rem; /* Adjust border radius as needed */
+    transition: background-color 0.3s ease;
+}
+
+.contact-btn:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* for before small  */
+@media (max-width: 575.98px) {
+    .image-container {
+      padding-top: 40px;
+    }
+    .text-overlay {
+      font-size: 1rem;
+    }
+    .overlay p {
+      font-size: 1rem;
+    }
+    .contact-btn {
+      font-size: 0.5rem;
+      padding: 8px 16px;
+    }
+  }
+
+
+  /* for large  */
+  @media (min-width: 768px) {
+    .text-overlay {
+      font-size: 4.5rem;
+      color: #cbd0d6;
+    }
+    .overlay p {
+      font-size: 1.3rem;
+      color: rgb(202, 208, 223);
+    }
+    .contact-btn {
+      font-size: 1.1rem;
+      padding: 12px 24px;
+    }
+  }
