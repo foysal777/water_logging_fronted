@@ -10,8 +10,7 @@ const handleRegister = (event) => {
     const password = getValue("password");
     const confirm_password = getValue("confirm_password");
     const role = getValue("user_type");
-    console.log(role)
-    console.log(typeof(role))
+
 
     const info = {
         username,
