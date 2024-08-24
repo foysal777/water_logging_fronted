@@ -26,3 +26,37 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(error => console.error('Error:', error));
 });
+
+
+
+
+
+// For sending Email 
+
+function sendTeamEmail(teamName) {
+    const token = localStorage.getItem('token');
+
+    fetch('http://127.0.0.1:8000/team/send-team-email/', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Token ${token}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ team_name: teamName })
+    })
+    .then(response => {
+        if (!response.ok) {
+          
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.message) {
+            alert(data.message);
+        } else if (data.error) {
+            alert('Error: ' + data.error);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}

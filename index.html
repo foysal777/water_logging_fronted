@@ -35,13 +35,13 @@
 
             overflow-x: hidden !important;
 
-            background-color: #2d2f31 !important;
+            background-color: #dfe4ea!important;
             font-family: "Josefin Sans", sans-serif !important;
             font-optical-sizing: auto;
             font-weight: 700 !important;
             font-style: normal;
             font-style: normal;
-            color: aliceblue;
+            color: rgb(0, 0, 0);
         }
 
         footer {
@@ -52,14 +52,51 @@
         main {
 
 
-           
-                font-family: "Raleway", sans-serif;
-                font-optical-sizing: auto;
-                font-weight:700;
-                font-style: normal;
-            
+
+            font-family: "Raleway", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
 
         }
+
+
+         /* *****************************  */
+         /* Base style for square images */
+.square-img {
+    width: calc(50% - 16px); /* 2 images per row */
+    height: auto;
+}
+
+/* Media query for small devices (portrait smartphones) */
+@media (max-width: 576px) {
+    .square-img {
+        width: 100%; /* Full width on small devices */
+        margin: 8px 0;
+    }
+}
+
+/* Media query for medium devices (landscape tablets) */
+@media (min-width: 576px) and (max-width: 768px) {
+    .square-img {
+        width: calc(50% - 16px); /* 2 images per row */
+    }
+}
+
+/* Media query for large devices (desktops) */
+@media (min-width: 992px) {
+    .square-img {
+        width: calc(50% - 16px); /* 2 images per row */
+    }
+}
+
+
+
+.tex{
+
+    font-size: 25px;
+}
+
     </style>
 </head>
 
@@ -72,10 +109,10 @@
         <!-- hero section  -->
         <section class="d-flex justify-content-center align-items-center  position-relative">
             <div class="image-container">
-                <img src="images/cover_1.png" alt="not found" class="image-container img-fluid w-100 ">
+                <img src="images/final.png" alt="not found" class="image-container img-fluid w-100  ">
                 <div class="over overlay ">
 
-                    <h1 class="text-overlay ">Waterlogging Today</h1>
+                    <h1 class="text-overlay ">Flood in Bangladesh</h1>
                     <p class="">The website of Instant Response</p>
                     <button class="contact-btn btn-primary rounded">Contact Now</button>
                 </div>
@@ -84,23 +121,36 @@
 
 
     </header>
-    <main class="text-white p-5">
+    <main class="text-dark p-5">
 
         <section>
-            <h1>The post section is below </h1>
+            <h1 class="text-center p-2 text-primary"> <u> Reason of Waterlogging</u> </h1>
 
-
-            <div class="card bg-secondary" style="width: 38rem;">
-                <img src="images/cov.jpeg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+            <div class="container pt-5">
+                <div class="row">
+                    <!-- First Column: Text Content -->
+                    <div class="tex col-lg-6">
+                        1. Excessive Rainfall <br>
+                        2. Poor Drainage Systems <br>
+                        3. High Water Table <br>
+                        4. Irrigation Practices <br>
+                        5. Deforestation and Land Use Changes <br>
+                        6. River Flooding <br>
+                        7. Natural Disasters
+                    </div>
+            
+                    <!-- Second Column: Image Grid -->
+                    <div class="col-lg-6 d-flex flex-wrap">
+                        <img class="img-fluid square-img m-2 rounded" src="images/water.jpg" alt="">
+                        <img class="img-fluid square-img m-2 rounded" src="images/w_1.jpg" alt="">
+                        <img class="img-fluid square-img m-2 rounded" src="images/w_2.jpg" alt="">
+                        <img class="img-fluid square-img m-2 rounded" src="images/w_44.jpg" alt="">
+                    </div>
                 </div>
             </div>
+            
 
-         <section>
+            <section>
 
 
 
@@ -117,7 +167,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
     <script src="index.js"></script>
-      <script src="auth.js"></script>
+    <script src="auth.js"></script>
     <script src="logout.js"></script>
     <script src="post.js"></script>
     <script src="./navbar.js"></script>

@@ -147,14 +147,15 @@ const load_post = () => {
         const formattedDate = date.toLocaleDateString('en-US', options);
 
         const cardHTML = `
-            <div class="card bg-secondary text-start p-3" style="width: 38rem; margin-top: 20px;">
+            <div class="card  text-start p-3" style="width: 38rem; margin-top: 20px;">
                 <div class="d-flex align-items-center mb-3">
                     <img src="images/ano.jpeg" class="rounded-circle me-2" alt="User Image" style="width: 50px; height: 50px;">
                     <span class="fw-bold"> Anonymous </br> ${formattedDate} </span>
                 </div>
-                <h5 class="card-title  rounded ">Title : ${post.title}</h5>
-                <p class="card-text">Description : ${post.content}</p>
-                <p class="card-text pt-2">Location: ${post.location}</p>
+                <hr>
+                <h5 class="fw-bold rounded ">Title : ${post.title}</h5>
+                <p class="">Description : ${post.content}</p>
+                <p class="card-text">Location: ${post.location}</p>
                 <img src="${post.image_url}" class="card-img-top rounded" alt="Image" style="height: 400px; object-fit: cover;">
                 <div class="">       
                  

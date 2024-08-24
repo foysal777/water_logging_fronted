@@ -29,7 +29,7 @@
         body {
 
             overflow-x: hidden !important;
-            background-color: #2d2f31 !important;
+            background-color: #dfe4ea !important;
             /* background-color: aliceblue; */
             font-family: "Josefin Sans", sans-serif !important;
             font-optical-sizing: auto;
@@ -76,13 +76,14 @@
 
         <!-- Team in part  -->
          
-        <h1 class="text-center pt-3">Our Response Team </h1>
+        <h1 class="text-center text-primary pt-3">Our Response Team </h1>
 
         <div class="d-flex gap-3 align-item-center p-5 justify-content-center">
-            <button type="button" class="btn btn-primary">Blue Team </button>
-            <button type="button" class="btn btn-secondary">Gray Team</button>
-            <button type="button" class="btn btn-success">Green Team</button>
-            <button type="button" class="btn btn-danger">Red Team</button>
+            <button class="btn btn-danger" onclick="sendTeamEmail('Red_Team')">Send Email to Red Team</button>
+            <button class="btn btn-primary" onclick="sendTeamEmail('Blue_Team')">Send Email to Blue Team</button>
+            <button class="btn btn-success" onclick="sendTeamEmail('Green_Team')">Send Email to Green Team</button>
+            <button class="btn btn-warning" onclick="sendTeamEmail('Yellow_Team')">Send Email to Yellow Team</button>
+            
               
         </div>
 
