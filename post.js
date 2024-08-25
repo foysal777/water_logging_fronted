@@ -1,3 +1,133 @@
+
+// Function to open the modal with post data for editing
+function openEditModal(post) {
+    document.getElementById('editTitle').value = post.title;
+    document.getElementById('editContent').value = post.content;
+    document.getElementById('editLocation').value = post.location;
+    document.getElementById('editPostId').value = post.id;
+
+    const editPostModal = new bootstrap.Modal(document.getElementById('editPostModal'));
+    editPostModal.show();
+}
+
+// Event listener for the save button in the edit modal
+document.getElementById('saveEditBtn').addEventListener('click', () => {
+    const form = document.getElementById('editPostForm');
+    const formData = new FormData(form);
+    const postId = formData.get('postId');
+
+    const jsonFormData = {};
+    formData.forEach((value, key) => {
+        jsonFormData[key] = value;
+    });
+
+    const token = localStorage.getItem('token');
+
+    fetch(`http://127.0.0.1:8000/team/post/${postId}/`, {
+        method: 'PUT',
+        headers: {
+            Authorization: `Token ${token}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jsonFormData)
+    })
+        .then(response => {
+            if (response.ok) {
+                response.json().then(data => {
+                    load_post(); // Reload the posts after updating
+                    const editPostModal = bootstrap.Modal.getInstance(document.getElementById('editPostModal'));
+                    editPostModal.hide();
+                });
+            } else {
+                response.json().then(data => showError(data.detail || 'Error updating post.'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showError('Error updating post.');
+        });
+});
+
+// Function to delete a post
+function deletePost(postId) {
+    if (confirm('Are you sure you want to delete this post?')) {
+        const token = localStorage.getItem('token');
+
+        fetch(`http://127.0.0.1:8000/team/post/${postId}/`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Token ${token}`,
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    load_post(); // Reload the posts after deleting
+                } else {
+                    response.json().then(data => showError(data.detail || 'Error deleting post.'));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showError('Error deleting post.');
+            });
+    }
+}
+
+// Modify the display_post function to include Edit and Delete actions
+const display_post = (posts) => {
+    const cardSection = document.querySelector('.card-section');
+    cardSection.innerHTML = "";
+
+    posts.forEach((post) => {
+        // Format the date
+        const date = new Date(post.created_at);
+        const options = {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: true
+        };
+        const formattedDate = date.toLocaleDateString('en-US', options);
+
+        const cardHTML = `
+            <div class="card  text-start p-3" style="width: 38rem;  margin-top: 20px;">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="images/ano.jpeg" class="rounded-circle me-2" alt="User Image" style="width: 50px; height: 50px;">
+                    <span class="fw-bold"> Anonymous </br> ${formattedDate} </span>
+                </div>
+                <hr>
+                <h5 class="fw-bold rounded ">Title : ${post.title}</h5>
+                <p class="">Description : ${post.content}</p>
+                <p class="card-text">Location: ${post.location}</p>
+                <img src="${post.image_url}" class="card-img-top rounded" alt="Image" style="height: 400px; object-fit: cover;">
+                <div class="">       
+                </div>
+                <div class="contact pt-3 "> 
+                    <a href="team.html" class="btn btn-primary">Contact Our Team</a> 
+                    <a href="javascript:void(0);" class="btn btn-success edit-post-btn" data-post-id="${post.id}">Edit Post</a> 
+                    <a href="javascript:void(0);" class="btn btn-danger delete-post-btn" data-post-id="${post.id}">Delete Post</a> 
+                </div>  
+                 
+            </div>
+           
+            
+            
+        `;
+
+        const cardElement = document.createElement('div');
+        cardElement.innerHTML = cardHTML;
+
+        cardElement.querySelector('.edit-post-btn').addEventListener('click', () => openEditModal(post));
+        cardElement.querySelector('.delete-post-btn').addEventListener('click', () => deletePost(post.id));
+
+        cardSection.appendChild(cardElement.firstElementChild);
+    });
+};
+
+
+
 function submitForm() {
     const form = document.getElementById('postForm');
     const formData = new FormData(form);
@@ -14,21 +144,21 @@ function submitForm() {
             method: 'POST',
             body: imgbbData
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 200) {
-                const imageUrl = data.data.url;
-                formData.append('image_url', imageUrl);
-                formData.delete('image');
-                submitPost(formData);
-            } else {
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 200) {
+                    const imageUrl = data.data.url;
+                    formData.append('image_url', imageUrl);
+                    formData.delete('image');
+                    submitPost(formData);
+                } else {
+                    showError('Error uploading image to imgbb.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
                 showError('Error uploading image to imgbb.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            showError('Error uploading image to imgbb.');
-        });
+            });
     } else {
         submitPost(formData);
     }
@@ -40,10 +170,10 @@ function submitPost(formData) {
     formData.forEach((value, key) => {
         jsonFormData[key] = value;
     });
-   
+
     const token = localStorage.getItem('token');
-    
-    fetch('http://127.0.0.1:8000/team/post/', { 
+
+    fetch('http://127.0.0.1:8000/team/post/', {
         method: 'POST',
         headers: {
             Authorization: `Token ${token}`,
@@ -51,23 +181,23 @@ function submitPost(formData) {
         },
         body: JSON.stringify(jsonFormData)
     })
-    .then(response => {
-        if (response.ok) {
-            response.json().then(data => {
-                console.log(data);
-                addCard(data);
-           
-                showSuccess();
-                document.getElementById('postForm').reset();
-            });
-        } else {
-            response.json().then(data => showError(data.detail || 'Error creating post.'));
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        showError('Error creating post.');
-    });
+        .then(response => {
+            if (response.ok) {
+                response.json().then(data => {
+                    console.log(data);
+                    addCard(data);
+
+                    showSuccess();
+                    document.getElementById('postForm').reset();
+                });
+            } else {
+                response.json().then(data => showError(data.detail || 'Error creating post.'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showError('Error creating post.');
+        });
 }
 
 function addCard(data) {
@@ -111,7 +241,7 @@ function showError(message) {
 const load_post = () => {
 
     const token = localStorage.getItem('token');
-    fetch("http://127.0.0.1:8000/team/post/" , {
+    fetch("http://127.0.0.1:8000/team/post/", {
         method: 'GET',
         headers: {
             Authorization: `Token ${token}`,
@@ -120,58 +250,12 @@ const load_post = () => {
 
 
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-        display_post(data);
-      });
-  };
-  
-  const display_post = (posts) => {
-    const cardSection = document.querySelector('.card-section');
-    cardSection.innerHTML = "";
-
-    posts.forEach((post) => {
-        console.log(post);
-
-        // Parse the created_at time and format it
-        const date = new Date(post.created_at);
-        const options = { 
-            day: 'numeric', 
-            month: 'long', 
-            year: 'numeric', 
-            hour: 'numeric', 
-            minute: '2-digit', 
-            hour12: true 
-        };
-        const formattedDate = date.toLocaleDateString('en-US', options);
-
-        const cardHTML = `
-            <div class="card  text-start p-3" style="width: 38rem; margin-top: 20px;">
-                <div class="d-flex align-items-center mb-3">
-                    <img src="images/ano.jpeg" class="rounded-circle me-2" alt="User Image" style="width: 50px; height: 50px;">
-                    <span class="fw-bold"> Anonymous </br> ${formattedDate} </span>
-                </div>
-                <hr>
-                <h5 class="fw-bold rounded ">Title : ${post.title}</h5>
-                <p class="">Description : ${post.content}</p>
-                <p class="card-text">Location: ${post.location}</p>
-                <img src="${post.image_url}" class="card-img-top rounded" alt="Image" style="height: 400px; object-fit: cover;">
-                <div class="">       
-                 
-               
-                </div>
-                <div class="contact pt-3"> 
-                    <a href="team.html" class="btn btn-primary">Contact Our Team</a> 
-                </div> 
-            </div>
-        `;
-
-        const cardElement = document.createElement('div');
-        cardElement.innerHTML = cardHTML;
-
-        cardSection.appendChild(cardElement.firstElementChild);
-    });
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data)
+            display_post(data);
+        });
 };
 
-load_post();
+
+load_post();  

@@ -28,7 +28,7 @@
         body {
 
             overflow-x: hidden !important;
-            background-color: #dfe4ea!important;
+            background-color: #dfe4ea !important;
             font-family: "Josefin Sans", sans-serif !important;
             font-optical-sizing: auto;
             font-weight: 700 !important;
@@ -50,41 +50,39 @@
             font-style: normal;
         }
 
-        .contact{
+        .contact {
 
             justify-content: center !important;
             align-items: center !important;
             display: flex;
+            gap: 20px;
         }
 
 
-/* Default width for large screens (e.g., desktops) */
-.card {
-    width: 38rem;
-    margin-top: 20px;
-}
+        /* Default width for large screens (e.g., desktops) */
+        .card {
+            width: 38rem;
+            margin-top: 20px;
+        }
 
 
-/* For small screens (e.g., large phones) */
-@media (max-width: 768px) {
-    .card {
-        width: 25rem; /* Adjust as needed */
-    }
-}
+        /* For small screens (e.g., large phones) */
+        @media (max-width: 768px) {
+            .card {
+                width: 25rem;
+                /* Adjust as needed */
+            }
+        }
 
-/* For extra small screens (e.g., small phones) */
-@media (max-width: 576px) {
-    .card{
-        width: 100% !important; /* Full width for very small screens */
-    }
-    .card-img-top{
+        /* For extra small screens (e.g., small phones) */
+        @media (max-width: 576px) {
+            .card {
+                width: 15rem !important;
+                /* Full width for very small screens */
+            }
 
-        width: 50%;
-        height: 50%;
-    }
-}
-
-
+         
+        }
     </style>
 </head>
 
@@ -111,11 +109,12 @@
 
 
             <!-- Modal -->
-            <div class="modal fade text-white" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade text-dark" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content " style="background-color: rgb(39, 43, 51);">
+                    <div class="modal-content " style="background-color: whitesmoke;">
                         <div class="modal-header text-center " style="background-color: rgb(64, 126, 250);">
-                            <h5 class="modal-title text-center align-items-center"  id="exampleModalLabel">Add Post</h5>
+                            <h5 class="modal-title text-center align-items-center" id="exampleModalLabel">Add Post</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -126,23 +125,25 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="content">Content</label>
-                                    <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+                                    <textarea class="form-control" id="content" name="content" rows="3"
+                                        required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="location">Location</label>
-                                    <input type="text" class="form-control" id="location" name="location" value="dhaka" required>
+                                    <input type="text" class="form-control" id="location" name="location" value="dhaka"
+                                        required>
                                 </div>
                                 <br>
                                 <div class="form-group">
                                     <label for="image">Add Image</label>
                                     <input type="file" class="form-control-file" id="image" name="image">
-                                </div>  <br><br>
+                                </div> <br><br>
                             </form>
-            
+
                             <div id="successMessage" class="alert alert-success mt-3" style="display: none;">
                                 Post created successfully!
                             </div>
-            
+
                             <div id="errorMessage" class="alert alert-danger mt-3" style="display: none;">
                                 Error creating post. Please try again.
                             </div>
@@ -153,33 +154,81 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
+            </div>  
+
 
 
             <!-- end modal  -->
-            <div class="card-section" >
-                <!-- Existing cards will go here -->
-                <div class="card " style="width: 38rem; margin-top: 20px;">
-                    <h5 class="card-title pt-3">Title: Jigatola Block Today</h5>
-                    <p class="card-text">Location: Dhaka, Jigatola, 1205</p>
-                    <p class="card-text">Date: 22 Aug 2024, 2:00pm</p>
-                    <img src="images/cov.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                     
-                   
-                        <a href="#" class="btn btn-primary">Contact Our Team</a>
-                    </div>
+
+
+        
+
+            <div class="card-section bg-white" id="card" data-post-id="${post.id}" style="width: 38rem; margin-top: 20px;">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="images/ano.jpeg" class="rounded-circle me-2" alt="User Image" style="width: 50px; height: 50px;">
+                    <span class="fw-bold"> Anonymous </br> 23 Aug 2024</span>
+                </div>
+                <hr>
+                <h5 class="card-title fw-bold rounded">Title: Tittle are here</h5>
+                <p class="card-text">Description: write your description</p>
+                <p class="card-text">Location: Dhaka</p>
+                <img src="images/cov.jpeg" class="card-img-top rounded" alt="Image" style="height: 400px; object-fit: cover;">
+                <div class="contact pt-3"> 
+                    <a href="team.html" class="btn btn-primary">Contact Our Team</a> 
+                    <a href="javascript:void(0);" class="btn btn-success" onclick="editPost('${post.id}')">Edit Post</a> 
+                    <a href="javascript:void(0);" class="btn btn-success" onclick="editPost('${post.id}')">Delete Post</a> 
                 </div>
             </div>
             
+
+
+           <!-- Edit Post Modal -->
+<div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPostModalLabel">Edit Post</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editPostForm">
+                    <div class="mb-3">
+                        <label for="editTitle" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="editTitle" name="title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editContent" class="form-label">Description</label>
+                        <textarea class="form-control" id="editContent" name="content" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editLocation" class="form-label">Location</label>
+                        <input type="text" class="form-control" id="editLocation" name="location">
+                    </div>
+                    <input type="hidden" id="editPostId" name="postId">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveEditBtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+          
+
+
+         
 
         </section>
 
 
 
 
-        <section>
+
+
+
+    
 
 
 
