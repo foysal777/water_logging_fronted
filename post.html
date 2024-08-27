@@ -59,30 +59,45 @@
         }
 
 
-        /* Default width for large screens (e.g., desktops) */
+
         .card {
             width: 38rem;
             margin-top: 20px;
         }
 
 
-        /* For small screens (e.g., large phones) */
+
         @media (max-width: 768px) {
             .card {
                 width: 25rem;
-                /* Adjust as needed */
+
             }
         }
 
-        /* For extra small screens (e.g., small phones) */
+
         @media (max-width: 576px) {
             .card {
                 width: 15rem !important;
-                /* Full width for very small screens */
+
             }
 
-         
+
         }
+
+        #volunteer-team-content {
+
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card-sections {
+            max-width: 100%;
+            border-radius: 20px ;
+          
+            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+        }
+        
     </style>
 </head>
 
@@ -95,153 +110,187 @@
     </header>
     <main class="text-dark p-5">
 
-        <!-- Post section part  -->
-        <section class="p-5 text-center d-flex flex-column align-items-center">
 
-            <div class="d-flex align-items-center justify-content-between">
-                <h4 class="p-5">you can post here</h4>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Add post
-                </button>
-            </div>
+        <!-- For volentter  -->
 
 
+        <div id="volunteer-team-content" class="d-none pt-5">
+            <h2 class="text-center">Hello, I am a Volunteer</h2>
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="card-sections p-4" id="card" data-post-id="${post.id}"
+                    style="width: 38rem; margin-top: 20px;">
+                    <div class="d-flex align-items-center mb-3">
 
 
-            <!-- Modal -->
-          <div class="modal fade text-dark" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content " style="background-color: whitesmoke;">
-                        <div class="modal-header text-center " style="background-color: rgb(64, 126, 250);">
-                            <h5 class="modal-title text-center align-items-center" id="exampleModalLabel">Add Post</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="postForm" enctype="multipart/form-data">
-                                <div class="form-group">
-                                    <label for="title">Title</label>
-                                    <input type="text" class="form-control" id="title" name="title" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="content">Content</label>
-                                    <textarea class="form-control" id="content" name="content" rows="3"
-                                        required></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="location">Location</label>
-                                    <input type="text" class="form-control" id="location" name="location" value="dhaka"
-                                        required>
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                    <label for="image">Add Image</label>
-                                    <input type="file" class="form-control-file" id="image" name="image">
-                                </div> <br><br>
-                            </form>
-
-                            <div id="successMessage" class="alert alert-success mt-3" style="display: none;">
-                                Post created successfully!
-                            </div>
-
-                            <div id="errorMessage" class="alert alert-danger mt-3" style="display: none;">
-                                Error creating post. Please try again.
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="submitForm()">Post Now</button>
-                        </div>
+                        <img src="images/ano.jpeg" class="rounded-circle me-2" alt="User Image"
+                            style="width: 50px; height: 50px;">
+                        <span class="fw-bold">Anonymous<br>23 Aug 2024</span>
                     </div>
+                    <hr>
+                    <h5 class="card-title fw-bold rounded">Title: Title goes here</h5>
+                    <p class="card-text">Description: Write your description</p>
+                    <p class="card-text">Location: Dhaka</p>
+                    <img src="images/cov.jpeg" class="card-img-top rounded" alt="Image"
+                        style="height: 400px; object-fit: cover;">
+                    <div class="contact pt-3">
+                        <a href="javascript:void(0);" class="btn btn-primary" id="accept-btn">Accept and Send Mail</a>
+                        <select class="form-select mt-3 d-none" id="team-select">
+                            <option value="Red_team">Red Team</option>
+                            <option value="Blue_team">Blue Team</option>
+                            <option value="Green_team">Green Team</option>
+                            <option value="Yellow_team">Yellow Team</option>
+                        </select>
+                    </div>
+
                 </div>
-            </div>  
-
-
-
-            <!-- end modal  -->
-
-
-        
-
-            <div class="card-section bg-white" id="card" data-post-id="${post.id}" style="width: 38rem; margin-top: 20px;">
-                <div class="d-flex align-items-center mb-3">
-                    <img src="images/ano.jpeg" class="rounded-circle me-2" alt="User Image" style="width: 50px; height: 50px;">
-                    <span class="fw-bold"> Anonymous </br> 23 Aug 2024</span>
-                </div>
-                <hr>
-                <h5 class="card-title fw-bold rounded">Title: Tittle are here</h5>
-                <p class="card-text">Description: write your description</p>
-                <p class="card-text">Location: Dhaka</p>
-                <img src="images/cov.jpeg" class="card-img-top rounded" alt="Image" style="height: 400px; object-fit: cover;">
-                <div class="contact pt-3"> 
-                    <a href="team.html" class="btn btn-primary">Contact Our Team</a> 
-                    <a href="javascript:void(0);" class="btn btn-success" onclick="editPost('${post.id}')">Edit Post</a> 
-                    <a href="javascript:void(0);" class="btn btn-success" onclick="editPost('${post.id}')">Delete Post</a> 
-                </div>
-            </div>
-            
-
-
-           <!-- Edit Post Modal -->
-<div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editPostModalLabel">Edit Post</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="editPostForm">
-                    <div class="mb-3">
-                        <label for="editTitle" class="form-label">Title</label>
-                        <input type="text" class="form-control" id="editTitle" name="title">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editContent" class="form-label">Description</label>
-                        <textarea class="form-control" id="editContent" name="content" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editLocation" class="form-label">Location</label>
-                        <input type="text" class="form-control" id="editLocation" name="location">
-                    </div>
-                    <input type="hidden" id="editPostId" name="postId">
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveEditBtn">Save changes</button>
             </div>
         </div>
-    </div>
-</div>
-
-          
 
 
-         
+        <!-- For volentter  end  -->
 
-        </section>
+        <div id="normal-user-content" class="d-none">
+            <!-- Post section part  -->
+            <section class="p-5 text-center d-flex flex-column align-items-center">
+
+                <div class="d-flex align-items-center justify-content-between">
+                    <h4 class="p-5">you can post here</h4>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Add post
+                    </button>
+                </div>
 
 
 
 
+                <!-- Modal -->
+                <div class="modal fade text-dark" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content " style="background-color: whitesmoke;">
+                            <div class="modal-header text-center " style="background-color: rgb(64, 126, 250);">
+                                <h5 class="modal-title text-center align-items-center" id="exampleModalLabel">Add Post
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="postForm" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="title">Title</label>
+                                        <input type="text" class="form-control" id="title" name="title" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="content">Content</label>
+                                        <textarea class="form-control" id="content" name="content" rows="3"
+                                            required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="location">Location</label>
+                                        <input type="text" class="form-control" id="location" name="location"
+                                            value="dhaka" required>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="image">Add Image</label>
+                                        <input type="file" class="form-control-file" id="image" name="image">
+                                    </div> <br><br>
+                                </form>
+
+                                <div id="successMessage" class="alert alert-success mt-3" style="display: none;">
+                                    Post created successfully!
+                                </div>
+
+                                <div id="errorMessage" class="alert alert-danger mt-3" style="display: none;">
+                                    Error creating post. Please try again.
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="submitForm()">Post Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 
-    
+                <!-- end modal  -->
 
 
+                <!-- Post section start -->
+
+                <div class="card-section " id="card" data-post-id="${post.id}"
+                    style="width: 38rem; margin-top: 20px;">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="images/ano.jpeg" class="rounded-circle me-2" alt="User Image"
+                            style="width: 50px; height: 50px;">
+                        <span class="fw-bold"> Anonymous </br> 23 Aug 2024</span>
+                    </div>
+                    <hr>
+                    <h5 class="card-title fw-bold rounded">Title: Tittle are here</h5>
+                    <p class="card-text">Description: write your description</p>
+                    <p class="card-text">Location: Dhaka</p>
+                    <img src="images/cov.jpeg" class="card-img-top rounded" alt="Image"
+                        style="height: 400px; object-fit: cover;">
+                    <div class="contact pt-3">
+                        <a href="team.html" class="btn btn-primary">Contact Our Team</a>
+                        <a href="javascript:void(0);" class="btn btn-success" onclick="editPost('${post.id}')">Edit
+                            Post</a>
+                        <a href="javascript:void(0);" class="btn btn-success" onclick="editPost('${post.id}')">Delete
+                            Post</a>
+                    </div>
+                </div>
+
+
+
+
+                <!-- Post section start  end -->
+
+                <!-- Edit Post Modal -->
+                <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editPostModalLabel">Edit Post</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="editPostForm">
+                                    <div class="mb-3">
+                                        <label for="editTitle" class="form-label">Title</label>
+                                        <input type="text" class="form-control" id="editTitle" name="title">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="editContent" class="form-label">Description</label>
+                                        <textarea class="form-control" id="editContent" name="content"
+                                            rows="3"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="editLocation" class="form-label">Location</label>
+                                        <input type="text" class="form-control" id="editLocation" name="location">
+                                    </div>
+                                    <input type="hidden" id="editPostId" name="postId">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="saveEditBtn">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+
+        </div>
 
 
     </main>
     <footer>
-
-
-
-
-
-
-
 
 
     </footer>
@@ -260,6 +309,7 @@
     <script src="logout.js"></script>
     <script src="post.js"></script>
     <script src="./navbar.js"></script>
+    <script src="./admin.js"></script>
 
 </body>
 
