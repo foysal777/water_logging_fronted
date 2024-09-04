@@ -17,7 +17,10 @@ fetch("navbar.html")
         // User is logged in
         navbarMenu.innerHTML = `
             <li class="nav-item">
-                <a class="dropdown-item" href="wishlist.html">Profile</a>
+                <a class="dropdown-item" href="profile.html">Profile</a>
+            </li>
+              <li class="nav-item">
+                <a class="dropdown-item" href="dash.html">Admin Panel</a>
             </li>
             <li class="nav-item">
                 <a id="logoutLink" class="dropdown-item" href="#" onclick="handlelogOut()">Logout</a>

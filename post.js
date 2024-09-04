@@ -73,13 +73,33 @@ function deletePost(postId) {
     }
 }
 
-// Modify the display_post function to include Edit and Delete actions
+// display all post 
 const display_post = (posts) => {
     const cardSection = document.querySelector('.card-section');
     cardSection.innerHTML = "";
 
+    const token = localStorage.getItem('token'); 
+    
+       
+    fetch('http://127.0.0.1:8000/account/api/user-role/', {
+        method: 'GET',
+        headers: {
+            Authorization: `Token ${token}`,
+            "Content-Type": "application/json",
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+ 
+
     posts.forEach((post) => {
-        // Format the date
+        console.log(data)
+        console.log(post)
         const date = new Date(post.created_at);
         const options = {
             day: 'numeric',
@@ -91,8 +111,8 @@ const display_post = (posts) => {
         };
         const formattedDate = date.toLocaleDateString('en-US', options);
 
-        const cardHTML = `
-            <div class="card  text-start p-4" style="width: 38rem;  margin-top: 20px;  border-radius: 20px; border: 2px solid rgb(46, 128, 243);">
+        let cardHTML = `
+            <div class="card text-start p-4" style="width: 38rem; margin-top: 20px; border-radius: 20px; border: 2px solid rgb(46, 128, 243);">
                 <div class="d-flex align-items-center mb-3">
                     <img src="images/ano.jpeg" class="rounded-circle me-2" alt="User Image" style="width: 50px; height: 50px;">
                     <span class="fw-bold"> Anonymous </br> ${formattedDate} </span>
@@ -102,19 +122,32 @@ const display_post = (posts) => {
                 <p class="">Description : ${post.content}</p>
                 <p class="card-text">Location: ${post.location}</p>
                 <img src="${post.image_url}" class="card-img-top rounded" alt="Image" style="height: 400px; object-fit: cover;">
-                <div class="">       
-                </div>
-                <div class="contact pt-3 "> 
+                <div class="contact pt-3">
                     <a href="team.html" class="btn btn-primary">Contact Our Team</a> 
                     <a href="javascript:void(0);" class="btn btn-success edit-post-btn" data-post-id="${post.id}">Edit Post</a> 
                     <a href="javascript:void(0);" class="btn btn-danger delete-post-btn" data-post-id="${post.id}">Delete Post</a> 
-                </div>  
-                 
-            </div>
-           
-            
-            
+                </div>
         `;
+
+        console.log(data.role)
+        if (data.role === 'volunteer_team') {
+      
+          
+            cardHTML += `
+                <div class="contact pt-3">
+                    <a href="javascript:void(0);" class="btn btn-primary" id="accept-btn-${post.id}">Accept and Send Mail</a>
+                    <select class="form-select mt-3 d-none" id="team-select-${post.id}">
+                        <option value="Red_Team">Red Team</option>
+                        <option value="Blue_Team">Blue Team</option>
+                        <option value="Green_Team">Green Team</option>
+                        <option value="Yellow_Team">Yellow Team</option>
+                    </select>
+                    <button class="btn btn-success mt-3 d-none" id="send-mail-btn-${post.id}">Send Email</button>
+                </div>
+            `;
+        }
+
+        cardHTML += `</div>`;
 
         const cardElement = document.createElement('div');
         cardElement.innerHTML = cardHTML;
@@ -122,11 +155,66 @@ const display_post = (posts) => {
         cardElement.querySelector('.edit-post-btn').addEventListener('click', () => openEditModal(post));
         cardElement.querySelector('.delete-post-btn').addEventListener('click', () => deletePost(post.id));
 
-        cardSection.appendChild(cardElement.firstElementChild);
+       console.log(cardElement.innerHTML)
+
+        if (data.role === 'volunteer_team') {
+          
+            const acceptBtn = cardElement.querySelector(`#accept-btn-${post.id}`);
+            const teamSelect = cardElement.querySelector(`#team-select-${post.id}`);
+            const sendMailBtn = cardElement.querySelector(`#send-mail-btn-${post.id}`);
+
+            acceptBtn.addEventListener('click', () => {
+                teamSelect.classList.remove('d-none');
+                sendMailBtn.classList.remove('d-none');
+            });
+
+            sendMailBtn.addEventListener('click', () => {
+                const selectedTeam = teamSelect.value;
+
+                if (selectedTeam) {
+                    const token = localStorage.getItem('token');
+                    fetch('http://127.0.0.1:8000/team/send-team-email/', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Token ${token}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            team_name: selectedTeam,
+                            post_id: post.id
+                        })
+                    })
+                        .then(response => {
+                            console.log(response)
+                            if (response.ok) {
+                                alert('Email sent successfully!');
+                            } else {
+                                alert('Failed to send email.');
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                }
+            });
+        }
+
+        cardSection.appendChild(cardElement);
     });
+
+
+})
+.catch(error => console.error('Error fetching user data:', error));
+
+
+    console.log(cardSection.innerHTML)
 };
 
 
+
+
+
+
+
+// ***************************************
 
 function submitForm() {
     const form = document.getElementById('postForm');

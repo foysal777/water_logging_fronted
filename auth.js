@@ -9,7 +9,7 @@ const handleRegister = (event) => {
     const email = getValue("email");
     const password = getValue("password");
     const confirm_password = getValue("confirm_password");
-    const role = getValue("user_type");
+    // const role = getValue("user_type");
 
 
     const info = {
@@ -19,7 +19,7 @@ const handleRegister = (event) => {
         email,
         password,
         confirm_password,
-        role, 
+        // role, 
     };
 
     console.log(JSON.stringify(info));
@@ -42,7 +42,7 @@ const handleRegister = (event) => {
                     } else {
                         alert("Check your email.");
                         document.getElementById("error").innerText = "Registration Successful. Check your email.";
-                        window.location.href = 'login.html';
+                        // window.location.href = 'login.html';
                     }
                 })
                 .catch((error) => {
