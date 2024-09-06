@@ -1,6 +1,6 @@
 const token = localStorage.getItem('token');
 
-fetch('http://127.0.0.1:8000/team/pending_request/', {
+fetch('https://water-backend-d44x.onrender.com/team/pending_request/', {
     method: 'GET', 
     headers: {
         'Authorization': `Token ${token}`,
@@ -67,7 +67,7 @@ fetch('http://127.0.0.1:8000/team/pending_request/', {
 // Function to handle request acceptance
 
 function acceptRequest(requestId) {
-    fetch(`http://127.0.0.1:8000/team/members/${requestId}/update-status/`, {
+    fetch(`https://water-backend-d44x.onrender.com/team/members/${requestId}/update-status/`, {
         method: 'PATCH',
         headers: {
             'Authorization': `Token ${token}`,
@@ -87,7 +87,7 @@ function acceptRequest(requestId) {
         console.log('Request accepted:', data);
 
         // Update the user's role if the request is accepted
-        return fetch(`http://127.0.0.1:8000/account/api/user-role/`, {
+        return fetch(`https://water-backend-d44x.onrender.com/account/api/user-role/`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Token ${token}`,

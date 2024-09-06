@@ -23,7 +23,7 @@ document.getElementById('saveEditBtn').addEventListener('click', () => {
 
     const token = localStorage.getItem('token');
 
-    fetch(`http://127.0.0.1:8000/team/post/${postId}/`, {
+    fetch(`https://water-backend-d44x.onrender.com/team/post/${postId}/`, {
         method: 'PUT',
         headers: {
             Authorization: `Token ${token}`,
@@ -53,7 +53,7 @@ function deletePost(postId) {
     if (confirm('Are you sure you want to delete this post?')) {
         const token = localStorage.getItem('token');
 
-        fetch(`http://127.0.0.1:8000/team/post/${postId}/`, {
+        fetch(`https://water-backend-d44x.onrender.com/team/post/${postId}/`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Token ${token}`,
@@ -81,7 +81,7 @@ const display_post = (posts) => {
     const token = localStorage.getItem('token'); 
     
        
-    fetch('http://127.0.0.1:8000/account/api/user-role/', {
+    fetch('https://water-backend-d44x.onrender.com/account/api/user-role/', {
         method: 'GET',
         headers: {
             Authorization: `Token ${token}`,
@@ -173,7 +173,7 @@ const display_post = (posts) => {
 
                 if (selectedTeam) {
                     const token = localStorage.getItem('token');
-                    fetch('http://127.0.0.1:8000/team/send-team-email/', {
+                    fetch('https://water-backend-d44x.onrender.com/team/send-team-email/', {
                         method: 'POST',
                         headers: {
                             'Authorization': `Token ${token}`,
@@ -261,7 +261,7 @@ function submitPost(formData) {
 
     const token = localStorage.getItem('token');
 
-    fetch('http://127.0.0.1:8000/team/post/', {
+    fetch('https://water-backend-d44x.onrender.com/team/post/', {
         method: 'POST',
         headers: {
             Authorization: `Token ${token}`,
@@ -329,7 +329,7 @@ function showError(message) {
 const load_post = () => {
 
     const token = localStorage.getItem('token');
-    fetch("http://127.0.0.1:8000/team/post/", {
+    fetch("https://water-backend-d44x.onrender.com/team/post/", {
         method: 'GET',
         headers: {
             Authorization: `Token ${token}`,

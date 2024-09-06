@@ -1,7 +1,7 @@
 
 // start 
 document.addEventListener("DOMContentLoaded", function () {
-    fetch('http://127.0.0.1:8000/team/teams/')
+    fetch('https://water-backend-d44x.onrender.com/team/teams/')
         .then(response => response.json())
         .then(data => {
             let teamsContainer = document.getElementById('teams');
@@ -41,7 +41,7 @@ function addVolunteer(teamId) {
     
 
     const token = localStorage.getItem('token');
-    fetch('http://127.0.0.1:8000/account/api/user-role/' , {
+    fetch('https://water-backend-d44x.onrender.com/account/api/user-role/' , {
  
         method: 'GET',
         headers: {
@@ -62,12 +62,9 @@ function addVolunteer(teamId) {
                 first_name: userInfo.first_name,
                 email: userInfo.email 
             };
-
-            console.log(data)
-
-       
+            console.log(data)     
             const token = localStorage.getItem('token');
-            fetch('http://127.0.0.1:8000/team/join-volunteer/', {
+            fetch('https://water-backend-d44x.onrender.com/team/join-volunteer/', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Token ${token}`,
@@ -77,8 +74,9 @@ function addVolunteer(teamId) {
             })
             .then(response => response.json())
             .then(result => {
-           
+                 
                 console.log('Success:', result);
+                alert("Join request has been Sent")
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -93,7 +91,7 @@ function acceptVolunteer(memberId) {
     const token = localStorage.getItem('token');
     console.log("fammilly")
 
-    fetch(`http://127.0.0.1:8000/team/team/accept-volunteer/${memberId}/`, {
+    fetch(`https://water-backend-d44x.onrender.com/team/team/accept-volunteer/${memberId}/`, {
 
         method: 'GET',
         headers: {
@@ -120,7 +118,7 @@ function acceptVolunteer(memberId) {
 function sendTeamEmail(teamName) {
     const token = localStorage.getItem('token');
 
-    fetch('http://127.0.0.1:8000/team/send-team-email/', {
+    fetch('https://water-backend-d44x.onrender.com/team/send-team-email/', {
         method: 'POST',
         headers: {
             'Authorization': `Token ${token}`,

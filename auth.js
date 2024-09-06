@@ -29,7 +29,7 @@ const handleRegister = (event) => {
 
         const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&^])[A-Za-z\d@.#$!%*?&]{8,15}$/;
         if (passwordPattern.test(password)) {
-            fetch("http://127.0.0.1:8000/account/register/", {
+            fetch("https://water-backend-d44x.onrender.com/account/register/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(info),
@@ -73,7 +73,7 @@ const handleLogin = (event) => {
     const errorElement = document.getElementById("error2");
     console.log(username, password);
     if ((username, password)) {
-        fetch("http://127.0.0.1:8000/account/login/", {
+        fetch("https://water-backend-d44x.onrender.com/account/login/", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({ username, password }),
@@ -115,7 +115,7 @@ const handleLogin = (event) => {
 const handlelogOut = () => {
     const token = localStorage.getItem("token");
   
-    fetch("http://127.0.0.1:8000/account/logout/", {
+    fetch("https://water-backend-d44x.onrender.com/account/logout/", {
       method: "POST",
       headers: {
         Authorization: `Token ${token}`,
