@@ -6,7 +6,7 @@ fetch("navbar.html")
     // Authentication part
     const navbarMenu = document.getElementById("navbarMenu");
     const token = localStorage.getItem("token");
-    console.log(token);
+    // console.log(token);
 
     if (token) {
       fetch("https://water-backend-d44x.onrender.com/team/is_admin/", {
