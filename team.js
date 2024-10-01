@@ -1,7 +1,7 @@
 
 // start 
 document.addEventListener("DOMContentLoaded", function () {
-    fetch('https://water-backend-d44x.onrender.com/team/teams/')
+    fetch('https://water-backend-api.vercel.app/team/teams/')
         .then(response => response.json())
         .then(data => {
             let teamsContainer = document.getElementById('teams');
@@ -41,7 +41,7 @@ function addVolunteer(teamId) {
     
 
     const token = localStorage.getItem('token');
-    fetch('https://water-backend-d44x.onrender.com/account/api/user-role/' , {
+    fetch('https://water-backend-api.vercel.app/account/api/user-role/' , {
  
         method: 'GET',
         headers: {
@@ -64,7 +64,7 @@ function addVolunteer(teamId) {
             };
             console.log(data)     
             const token = localStorage.getItem('token');
-            fetch('https://water-backend-d44x.onrender.com/team/join-volunteer/', {
+            fetch('https://water-backend-api.vercel.app/team/join-volunteer/', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Token ${token}`,
@@ -91,7 +91,7 @@ function acceptVolunteer(memberId) {
     const token = localStorage.getItem('token');
     console.log("fammilly")
 
-    fetch(`https://water-backend-d44x.onrender.com/team/team/accept-volunteer/${memberId}/`, {
+    fetch(`https://water-backend-api.vercel.app/team/team/accept-volunteer/${memberId}/`, {
 
         method: 'GET',
         headers: {
@@ -118,7 +118,7 @@ function acceptVolunteer(memberId) {
 function sendTeamEmail(teamName) {
     const token = localStorage.getItem('token');
 
-    fetch('https://water-backend-d44x.onrender.com/team/send-team-email/', {
+    fetch('https://water-backend-api.vercel.app/team/send-team-email/', {
         method: 'POST',
         headers: {
             'Authorization': `Token ${token}`,

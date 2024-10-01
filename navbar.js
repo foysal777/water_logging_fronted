@@ -9,7 +9,7 @@ fetch("navbar.html")
     // console.log(token);
 
     if (token) {
-      fetch("https://water-backend-d44x.onrender.com/team/is_admin/", {
+      fetch("https://water-backend-api.vercel.app/team/is_admin/", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
