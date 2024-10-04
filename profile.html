@@ -99,10 +99,10 @@
 
             <div class="profile-card pt-5"  id="profile-card">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwyuJc6NEaN9Q_ZMryrT1w_mMGuXDvi9FQh324KPE5wz0rq-rs2K2uGkGws1nrCLC8yCU&usqp=CAU">
-                <h4 >John Doe</h4>
-                <p><strong>Username:</strong> johndoe</p>
-                <p><strong>Email:</strong> johndoe@example.com</p>
-                <p><strong>Role:</strong> Volunteer User</p>
+                <!-- <h4 >John Doe</h4>
+                <p><strong>Username:</strong> None</p>
+                <p><strong>Email:</strong> None</p>
+                <p><strong>Role:</strong> None</p> -->
             </div>
         </section>
 
@@ -141,29 +141,33 @@
     
        
         fetch('https://water-backend-api.vercel.app/account/api/user-role/', {
-            method: 'GET',
-            headers: {
-                Authorization: `Token ${token}`,
-                "Content-Type": "application/json",
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const profileCard = document.getElementById('profile-card');
-            profileCard.innerHTML = `
-                <img src="images/profile.png" alt="User Photo">
-                <h4>${data.first_name}</h4>
-                <p><strong>Username:</strong> ${data.username}</p>
-                <p><strong>Email:</strong> ${data.email}</p>
-                <p><strong>Role:</strong> ${data.role}</p>
-            `;
-        })
-        .catch(error => console.error('Error fetching user data:', error));
+    method: 'PATCH',
+    headers: {
+        Authorization: `Token ${token}`,
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        role: "volunteer_team"
+    })  
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json();
+})
+.then(data => {
+    const profileCard = document.getElementById('profile-card');
+    profileCard.innerHTML = `
+        <img src="images/profile.png" alt="User Photo">
+        <h4>${data.first_name}</h4>
+        <p><strong>Username:</strong> ${data.username}</p>
+        <p><strong>Email:</strong> ${data.email}</p>
+        <p><strong>Role:</strong> ${data.role}</p>
+    `;
+})
+.catch(error => console.error('Error fetching user data:', error));
+
     </script>
     
 
