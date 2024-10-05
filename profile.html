@@ -144,14 +144,12 @@
 
 
         fetch('https://water-backend-api.vercel.app/account/api/user-role/', {
-            method: 'PATCH',
+            method: 'GET',
             headers: {
                 Authorization: `Token ${token}`,
                 "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                role: "volunteer_team"
-            })
+            }
+            
         })
             .then(response => {
                 if (!response.ok) {
@@ -160,6 +158,8 @@
                 return response.json();
             })
             .then(data => {
+
+                console.log(data);
                 const profileCard = document.getElementById('profile-card');
                 profileCard.innerHTML = `
         <img src="images/profile.png" alt="User Photo">
