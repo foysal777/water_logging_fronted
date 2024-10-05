@@ -329,6 +329,7 @@ function showError(message) {
 const load_post = () => {
 
     const token = localStorage.getItem('token');
+    console.log(token)
     fetch("https://water-backend-api.vercel.app/team/post/", {
         method: 'GET',
         headers: {
