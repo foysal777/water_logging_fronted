@@ -66,6 +66,60 @@ fetch('https://water-backend-api.vercel.app/team/pending_request/', {
 
 // Function to handle request acceptance
 
+// function acceptRequest(requestId) {
+//     fetch(`https://water-backend-api.vercel.app/team/members/${requestId}/update-status/`, {
+//         method: 'PATCH',
+//         headers: {
+//             'Authorization': `Token ${token}`,
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({ 
+//             is_pending: true,
+//         })
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Network response was not ok');
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         console.log('Request accepted:', data);
+
+//         // Update the user's role if the request is accepted
+//         return fetch(`https://water-backend-api.vercel.app/account/api/user-role/`, {
+//             method: 'PATCH',
+//             headers: {
+//                 'Authorization': `Token ${token}`,
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify({
+//                 role: "volunteer_team"
+//             })
+//         });
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Failed to update user role');
+//         }
+//         return response.json();
+//     })
+//     .then(roleData => {
+//         console.log('User role updated:', roleData);
+        
+//         // Remove the request row from the table
+//         document.querySelector(`button[data-id="${requestId}"]`).closest('tr').remove();
+//     })
+//     .catch(error => {
+//         console.error('Error:', error);
+//         alert('Failed to accept the request or update the user role. Please try again.');
+//     });
+// }
+
+
+
+
+
 function acceptRequest(requestId) {
     fetch(`https://water-backend-api.vercel.app/team/members/${requestId}/update-status/`, {
         method: 'PATCH',
@@ -106,6 +160,9 @@ function acceptRequest(requestId) {
     })
     .then(roleData => {
         console.log('User role updated:', roleData);
+        
+        // Store the updated role in localStorage
+        localStorage.setItem('roleData', 'volunteer_team');
         
         // Remove the request row from the table
         document.querySelector(`button[data-id="${requestId}"]`).closest('tr').remove();
