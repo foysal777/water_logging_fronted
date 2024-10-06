@@ -121,6 +121,7 @@ fetch('https://water-backend-api.vercel.app/team/pending_request/', {
 
 
 function acceptRequest(requestId) {
+    console.log("hello");
     fetch(`https://water-backend-api.vercel.app/team/members/${requestId}/update-status/`, {
         method: 'PATCH',
         headers: {
@@ -161,10 +162,10 @@ function acceptRequest(requestId) {
     .then(roleData => {
         console.log('User role updated:', roleData);
         
-        // Store the updated role in localStorage
+        
         localStorage.setItem('roleData', 'volunteer_team');
         
-        // Remove the request row from the table
+       
         document.querySelector(`button[data-id="${requestId}"]`).closest('tr').remove();
     })
     .catch(error => {
