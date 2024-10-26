@@ -1,19 +1,59 @@
-✅ Full Authentication: Only authenticated users can view, create, edit, and delete posts.
+# Flood Mangagement Project
 
-✅  Create Posts: Authenticated users can create new posts with details such as title, description, and images.
+This project is a web-based flood management system designed to assist users in sharing and managing flood-related information, seeking assistance, and collaborating with volunteer teams. The platform offers features such as user authentication, posting and managing flood updates, and communication with volunteer teams to improve disaster response.
+There are two types of user 
+1) Admin
+2) User
 
-✅  View Posts: Logged-in users can view posts created by themselves and others in the community.
+## Admin
 
-✅  Edit Posts: Users can edit their own posts to update the content or correct mistakes.
+- Admin can log in and log out.
+- Admin can manage the dashboard.
+- Admin can manage profile.
 
-✅  Delete Posts: Users have the option to delete their posts if they are no longer relevant.
 
-✅  Contact Team: Authenticated users can contact the support or volunteer team directly via a contact form or message.
+## User
+- user can register, login and logout.
+- User can see post  details.
+- User can add post give comment.
+- Users can send message for response team.
+- User can be add voluntter team request
+- user can see her profile , update , change password 
+  
 
-✅  Send Message: Users can send messages to team members for assistance or queries.
 
-✅  Join Volunteer: Users can request to join a volunteer team through the platform.
+## Features
 
-✅  Volunteer Request Approval: Teams can approve user requests to join their volunteer groups.
+- User Authentication , login ,logout
+- User Management
+- Volunteer Team Collaboration
+- Add Post, Update & Delete
+- Communication & Notifications
+- Admin Capabilities
+- Response team members 
+- Funding collection
 
-✅  Team Management: Users can manage their volunteer team interactions, such as sending messages or handling member requests.
+
+
+
+## Technologies Used
+
+- **Frontend**: HTML, CSS, JavaScript
+- **Frameworks**: Bootstrap for responsive UI, Font Awesome for icons
+- **Backend**: Django for server-side functionality and data handling
+- **Database**: SQLite or PostgreSQL
+- **APIs**: For potential integration with external services
+
+## Usages
+- Navigate to https://cloth-store-backend-api.vercel.app/ in your browser.
+- Register as a new user or login if you already have an account.
+- Browse products, add them to your cart, view details, and interact with wishlists and reviews.
+- Access your dashboard to manage your profile, view your orders, and check out saved items.
+
+## Contact
+- Email: foysal.cse11@gmail.com
+- GitHub: https://github.com/foysal777
+
+
+
+
